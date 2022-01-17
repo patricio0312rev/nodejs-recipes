@@ -22,6 +22,25 @@ router.get('/step/:id', (req, res) => {
   
   // Asignando valor final a la variable
   elapsedTime = +elapsedTime;
+  
+  // Obteniendo stepIndex
+  let stop = false;
+  const stepIndex = recipe.timers.reduce((prev, currentTime, index) => {
+    if (!stop) {
+      if (currentTime >= elapsedTime) {
+        stop = true;
+      }
+      return index;
+    }
+
+    return prev;
+  }, 0);
+
+  // Enviando respuesta final
+  res.json({
+    index: stepIndex
+  });
+
 });
 module.exports = router;
 
