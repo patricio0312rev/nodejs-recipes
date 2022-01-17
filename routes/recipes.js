@@ -12,6 +12,16 @@ router.get('/step/:id', (req, res) => {
   if (!recipe) {
     return res.status(400).send("NOT_FOUND");
   }
+
+  // Obteniendo elapsedTime de parámetros opcionales
+  let { elapsedTime = '' } = req.query;
+
+  if (!elapsedTime) {
+    elapsedTime = 0;
+  }
+  
+  // Asignando valor final a la variable
+  elapsedTime = +elapsedTime;
 });
 module.exports = router;
 
